@@ -8,6 +8,11 @@
 [![dependencies][grunty-dependencies-image] ][grunty-dependencies-url]
 [![devdependencies][grunty-devdependencies-image] ][grunty-devdependencies-url]
 
+## Details
+
+Read [Put mock data into Node require cache](http://glebbahmutov.com/blog/put-mock-data-into-node-require-cache/)
+to learn how this project fakes `gruntfile.js` without actually even saving mock one to disk.
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2015
