@@ -46,6 +46,7 @@ require.cache[resolved] = {
       }
     });
     grunt.task.loadNpmTasks('grunt-contrib-concat');
+    grunt.registerTask('default', []);
   },
   parent: null,
   filename: resolved,
@@ -58,7 +59,6 @@ var grunt = require('grunt');
 
 var _exists = grunt.file.exists;
 grunt.file.exists = function mockExists(filename) {
-  console.log('mock exists', filename);
   if (filename === fakeGruntfile) {
     return true;
   } else {
@@ -73,8 +73,7 @@ function done() {
 }
 
 var options = {
-  version: false,
-  verbose: true,
+  verbose: false,
   gruntfile: fakeGruntfile
 };
 
