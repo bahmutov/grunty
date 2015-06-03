@@ -4,7 +4,11 @@
   "description": "Run any grunt plugin as NPM script without Gruntfile.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "concat": "grunty grunt-contrib-concat test/a.js test/b.js -o test/out.js"
+  },
+  "bin": {
+    "grunty": "./bin/grunty.js"
   },
   "keywords": [
     "grunt",
