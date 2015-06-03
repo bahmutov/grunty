@@ -23,6 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "grunt": "0.4.5",
-    "grunt-contrib-concat": "0.5.1"
+    "grunt-contrib-concat": "0.5.1",
+    "really-need": "1.6.3"
   }
 }
