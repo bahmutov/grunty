@@ -1,0 +1,24 @@
+{
+  "name": "grunty",
+  "version": "0.1.0",
+  "description": "Run any grunt plugin as NPM script without Gruntfile.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "grunt",
+    "cli",
+    "helper",
+    "npm",
+    "script",
+    "runner",
+    "plugin"
+  ],
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "grunt": "0.4.5",
+    "grunt-contrib-concat": "0.5.1"
+  }
+}
