@@ -18,7 +18,7 @@ then use in the `package.json`
 
 ```json
 "scripts": {
-  "concat": "grunty grunt-contrib-concat concat --src=test/a.js,test/b.js --dest=test/out.js",
+  "concat": "grunty grunt-contrib-concat concat --src=a.js,b.js --dest=dist/out.js",
   "nice": "grunty grunt-nice-package nice-package"
 }
 ```
