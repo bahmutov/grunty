@@ -48,10 +48,27 @@ Object.keys(grunt.cli.options).forEach(function (key) {
   }
 });
 
+var plugin = process.argv[2];
+la(check.unemptyString(plugin),
+  'missing grunt plugin name to run, for example grunt-contrib-concat',
+  process.argv);
+console.log('plugin', plugin);
+
+var target = process.argv[3];
+function isOption(x) {
+  return check.unemptyString(x) && /^-/.test(x);
+}
+if (check.unemptyString(target)) {
+  if (isOption(target)) {
+    target = null;
+  }
+}
+
 var fakeGruntfileFunc = require('../src/fake-gruntfile-code')({
-  task: 'grunt-contrib-concat',
+  plugin: plugin,
+  target: target,
   src: grunt.cli.options.src,
-  dest: 'test/out.js'
+  dest: grunt.cli.options.dest
 });
 la(check.fn(fakeGruntfileFunc), 'expected fake gruntfile function', fakeGruntfileFunc);
 la(fakeGruntfileFunc.length === 1,
@@ -85,6 +102,8 @@ var options = {
   gruntfile: fakeGruntfile
 };
 
-grunt.tasks(['concat'], options, done);
+if (target) {
+  grunt.tasks([target], options, done);
+}
 // console.log(grunt.file);
 // grunt.cli();
