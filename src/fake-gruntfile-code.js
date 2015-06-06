@@ -1,9 +1,14 @@
 require('lazy-ass');
 var check = require('check-more-types');
 
+function isValidSource(x) {
+  return check.unemptyString(x) ||
+    check.array(x);
+}
+
 var optionsSchema = {
   task: check.unemptyString,
-  src: check.defined,
+  src: isValidSource,
   dest: check.unemptyString
 };
 var isValidOptions = check.schema.bind(null, optionsSchema);
@@ -25,8 +30,6 @@ module.exports = function fakeGruntfileInit(options) {
     });
     grunt.task.loadNpmTasks(options.task);
     grunt.registerTask('default', []);
-
-    console.log(grunt.option.flags())
   }
 
   return fakeGruntfile;

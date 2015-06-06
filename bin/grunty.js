@@ -3,10 +3,16 @@
 require('lazy-ass');
 var check = require('check-more-types');
 
-console.log('grunty in', process.cwd());
-var resolve = require('path').resolve;
 var join = require('path').join;
 var fromThis = join.bind(null, __dirname);
+var pkg = require(fromThis('../package.json'));
+console.log('%s@%s - %s\n  %s %s\n  cwd %s',
+  pkg.name, pkg.version,
+  pkg.description,
+  pkg.author, pkg.homepage,
+  process.cwd());
+
+var resolve = require('path').resolve;
 
 /*
 var pkg = require('../package');
@@ -30,10 +36,21 @@ Module._resolveFilename = function fakeResolveFilename(request, parent) {
   }
 };
 
-console.log('putting fake function into', resolved);
+var grunt = require('grunt');
+// console.log(grunt.task.registerTask.toString());
+Object.keys(grunt.cli.options).forEach(function (key) {
+  var str = grunt.cli.options[key];
+  if (check.unemptyString(str)) {
+    var split = str.split(',');
+    if (split.length > 1) {
+      grunt.cli.options[key] = split;
+    }
+  }
+});
+
 var fakeGruntfileFunc = require('../src/fake-gruntfile-code')({
   task: 'grunt-contrib-concat',
-  src: ['test/a.js', 'test/b.js'],
+  src: grunt.cli.options.src,
   dest: 'test/out.js'
 });
 la(check.fn(fakeGruntfileFunc), 'expected fake gruntfile function', fakeGruntfileFunc);
@@ -47,10 +64,7 @@ require.cache[resolved] = {
   loaded: true
 };
 
-var grunt = require('grunt');
-
-// console.log(grunt.task.registerTask.toString());
-
+// process.exit(0);
 var _exists = grunt.file.exists;
 grunt.file.exists = function mockExists(filename) {
   if (filename === fakeGruntfile) {
@@ -67,7 +81,7 @@ function done() {
 }
 
 var options = {
-  verbose: false,
+  verbose: Boolean(grunt.cli.options.verbose),
   gruntfile: fakeGruntfile
 };
 

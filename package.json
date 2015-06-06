@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "concat": "grunty grunt-contrib-concat test/a.js test/b.js -o test/out.js"
+    "concat": "grunty grunt-contrib-concat --src='test/[a|b].js' --dest=test/out.js --verbose",
+    "concat2": "grunty grunt-contrib-concat --src=test/a.js,test/b.js --dest=test/out.js"
   },
   "bin": {
     "grunty": "./bin/grunty.js"
