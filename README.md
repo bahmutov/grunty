@@ -25,9 +25,11 @@ then use in the `package.json`
 
 ## Details
 
+Separate multiple values like filenames using `,` as in `--src=path/to/foo,path/to/bar`
+
 The plugin runs with the your local `package.json` attached to the config, thus you can use
 `pkg.name`, `pkg.description` and other properties.
-If the plugin requires more elaborate options, write `Gruntfile.js`
+If the plugin requires more elaborate options, write `Gruntfile.js`.
 
 You do need to install the actual plugin and save reference in the `dev` dependencies.
 
