@@ -4,7 +4,7 @@
   "description": "Run any grunt plugin as NPM script without Gruntfile.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run concat; npm run concat2",
     "concat": "grunty grunt-contrib-concat --src='test/[a|b].js' --dest=test/out.js --verbose",
     "concat2": "grunty grunt-contrib-concat --src=test/a.js,test/b.js --dest=test/out.js"
   },
@@ -25,7 +25,6 @@
   "dependencies": {
     "check-more-types": "1.7.2",
     "grunt": "0.4.5",
-    "grunt-contrib-concat": "0.5.1",
     "lazy-ass": "0.5.8"
   },
   "repository": {
@@ -35,5 +34,13 @@
   "bugs": {
     "url": "https://github.com/bahmutov/grunty/issues"
   },
-  "homepage": "https://github.com/bahmutov/grunty"
+  "homepage": "https://github.com/bahmutov/grunty",
+  "devDependencies": {
+    "grunt-contrib-concat": "0.5.1",
+    "pre-git": "0.2.1"
+  },
+  "pre-commit": [
+    "npm test",
+    "npm version"
+  ]
 }
