@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+require('lazy-ass');
+var check = require('check-more-types');
 
 console.log('grunty in', process.cwd());
 var resolve = require('path').resolve;
@@ -29,25 +31,17 @@ Module._resolveFilename = function fakeResolveFilename(request, parent) {
 };
 
 console.log('putting fake function into', resolved);
+var fakeGruntfileFunc = require('../src/fake-gruntfile-code')({
+  task: 'grunt-contrib-concat',
+  src: ['test/a.js', 'test/b.js'],
+  dest: 'test/out.js'
+});
+la(check.fn(fakeGruntfileFunc), 'expected fake gruntfile function', fakeGruntfileFunc);
+la(fakeGruntfileFunc.length === 1,
+  'fake gruntfile function should expect 1 argument', fakeGruntfileFunc.toString());
 require.cache[resolved] = {
   id: resolved,
-  exports: function fakeGruntfile(grunt) {
-    console.log('inside fake gruntfile');
-
-    var pkg = grunt.file.readJSON('package.json');
-    grunt.initConfig({
-      pkg: pkg,
-      concat: {
-        all: {
-          // TODO replace with actual command line values
-          src: ['test/a.js', 'test/b.js'],
-          dest: 'test/out.js'
-        }
-      }
-    });
-    grunt.task.loadNpmTasks('grunt-contrib-concat');
-    grunt.registerTask('default', []);
-  },
+  exports: fakeGruntfileFunc,
   parent: null,
   filename: resolved,
   loaded: true
