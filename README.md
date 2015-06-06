@@ -8,7 +8,28 @@
 [![dependencies][grunty-dependencies-image] ][grunty-dependencies-url]
 [![devdependencies][grunty-devdependencies-image] ][grunty-devdependencies-url]
 
+Often I want to run a simple task as NPM script, but hate creating verbose Gruntfile, installing
+grunt dependencies, etc. Enter **grunty** - just specify the plugin's module, name and any options
+in the NPM script command. No global grunt installation is necessary.
+
+`npm install --save-dev grunty`
+
+then use in the `package.json`
+
+```json
+"scripts": {
+  "concat": "grunty grunt-contrib-concat concat --src=test/a.js,test/b.js --dest=test/out.js",
+  "nice": "grunty grunt-nice-package nice-package"
+}
+```
+
 ## Details
+
+The plugin runs with the your local `package.json` attached to the config, thus you can use
+`pkg.name`, `pkg.description` and other properties.
+If the plugin requires more elaborate options, write `Gruntfile.js`
+
+You do need to install the actual plugin and save reference in the `dev` dependencies.
 
 Read [Put mock data into Node require cache](http://glebbahmutov.com/blog/put-mock-data-into-node-require-cache/)
 to learn how this project fakes `gruntfile.js` without actually even saving mock one to disk.
