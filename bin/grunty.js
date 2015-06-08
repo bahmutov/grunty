@@ -9,7 +9,7 @@ var pkg = require(fromThis('../package.json'));
 console.log('%s@%s - %s\n  %s %s\n  cwd %s',
   pkg.name, pkg.version,
   pkg.description,
-  pkg.author, pkg.homepage,
+  JSON.stringify(pkg.author), pkg.homepage,
   process.cwd());
 
 var resolve = require('path').resolve;

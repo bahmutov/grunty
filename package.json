@@ -1,7 +1,7 @@
 {
   "name": "grunty",
   "description": "Run any grunt plugin as NPM script without Gruntfile.js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bin": {
     "grunty": "./bin/grunty.js"
