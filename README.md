@@ -8,6 +8,8 @@
 [![dependencies][grunty-dependencies-image] ][grunty-dependencies-url]
 [![devdependencies][grunty-devdependencies-image] ][grunty-devdependencies-url]
 
+## Zero task configuration (defaults)
+
 Often I want to run a simple task as NPM script, but hate creating verbose Gruntfile, installing
 grunt dependencies, etc. Enter **grunty** - just specify the plugin's module, name and any options
 in the NPM script command. No global grunt installation is necessary.
@@ -23,6 +25,37 @@ then use in the `package.json`
 }
 ```
 
+## Using configuration file
+
+You can even pass configuration using a JSON file or JS file (just export an object)
+
+For example, put grunt plugin configurations into `config.json`
+
+```json
+{
+    "concat": {
+        "default": {
+            "src:" ["a.js", "b.js"],
+            "dest": "dist/out.js"
+        }
+    }
+}
+```
+
+The add `config.json` to the NPM script line
+
+```json
+"scripts": {
+  "concat": "grunty grunt-contrib-concat concat config.json",
+}
+```
+
+You can see an example JSON config file in [test/concat.json](test/concat.json) which can be
+triggered using `npm run concat-config` command defined in the [package scripts](package.json).
+
+Similarly you can export the JavaScript object from a JS file for configuration,
+see [test/concat.js](test/concat.js)
+
 ## Details
 
 Separate multiple values like filenames using `,` as in `--src=path/to/foo,path/to/bar`
@@ -35,6 +68,20 @@ You do need to install the actual plugin and save reference in the `dev` depende
 
 Read [Put mock data into Node require cache](http://glebbahmutov.com/blog/put-mock-data-into-node-require-cache/)
 to learn how this project fakes `gruntfile.js` without actually even saving mock one to disk.
+
+If you need to run an example and see diagnostic messages, you can using npm scripts and enabling
+the debug messages using [debug](https://www.npmjs.com/package/debug). 
+For example to debug parsing config json
+
+    $ DEBUG=cli npm run concat-config
+    > grunty grunt-contrib-concat concat test/concat.json
+    grunty@0.1.2 - Run any grunt plugin as NPM script without Gruntfile.js
+      "Gleb Bahmutov <gleb.bahmutov@gmail.com>" https://github.com/bahmutov/grunty
+      cwd /Users/gleb/git/grunty
+      cli grunty options +0ms { tasks: [], npm: [] }
+      cli grunty plugin +2ms grunt-contrib-concat
+      cli grunty target +0ms concat
+      cli grunty config filename +1ms /grunty/test/concat.json
 
 ### Small print
 

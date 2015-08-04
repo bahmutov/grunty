@@ -1,7 +1,7 @@
 {
   "name": "grunty",
   "description": "Run any grunt plugin as NPM script without Gruntfile.js",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bin": {
     "grunty": "./bin/grunty.js"
@@ -12,6 +12,7 @@
   "contributors": [],
   "dependencies": {
     "check-more-types": "1.7.2",
+    "debug": "2.2.0",
     "grunt": "0.4.5",
     "lazy-ass": "0.5.8"
   },
@@ -44,9 +45,11 @@
     "url": "git@github.com:bahmutov/grunty.git"
   },
   "scripts": {
-    "test": "npm run concat; npm run concat2; npm run nice",
+    "test": "npm run concat; npm run concat2; npm run nice; npm run concat-config; npm run concat-js-config",
     "concat": "grunty grunt-contrib-concat concat --src='test/[a|b].js' --dest=test/out.js --verbose",
     "concat2": "grunty grunt-contrib-concat concat --src=test/a.js,test/b.js --dest=test/out.js",
+    "concat-config": "grunty grunt-contrib-concat concat test/concat.json",
+    "concat-js-config": "grunty grunt-contrib-concat concat test/concat.js",
     "nice": "grunty grunt-nice-package nice-package"
   }
 }

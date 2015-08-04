@@ -21,7 +21,8 @@ function isMultiTask(options) {
   return check.object(options) &&
     check.unemptyString(options.target) &&
     check.has(options, 'src') &&
-    check.has(options, 'dest');
+    check.has(options, 'dest') &&
+    check.maybe.object(options.config);
 }
 
 module.exports = function fakeGruntfileInit(options) {
@@ -33,9 +34,9 @@ module.exports = function fakeGruntfileInit(options) {
 
     var pkg = grunt.file.readJSON('package.json');
 
-    var config = {
-      pkg: pkg
-    };
+    var config = check.object(options.config) ? options.config : {};
+    config.pkg = pkg;
+
     if (isMultiTask(options)) {
       config[options.target] = {
         default: options

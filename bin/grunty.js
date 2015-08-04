@@ -3,7 +3,10 @@
 require('lazy-ass');
 var check = require('check-more-types');
 
+var log = require('debug')('cli');
+
 var join = require('path').join;
+var fileExists = require('fs').existsSync;
 var fromThis = join.bind(null, __dirname);
 var pkg = require(fromThis('../package.json'));
 console.log('%s@%s - %s\n  %s %s\n  cwd %s',
@@ -48,11 +51,13 @@ Object.keys(grunt.cli.options).forEach(function (key) {
   }
 });
 
+log('grunty options', grunt.cli.options);
+
 var plugin = process.argv[2];
 la(check.unemptyString(plugin),
   'missing grunt plugin name to run, for example grunt-contrib-concat',
   process.argv);
-console.log('plugin', plugin);
+log('grunty plugin', plugin);
 
 var target = process.argv[3];
 function isOption(x) {
@@ -63,10 +68,35 @@ if (check.unemptyString(target)) {
     target = null;
   }
 }
+log('grunty target', target);
+
+function isJson(name) {
+  return /\.json$/.test(name);
+}
+
+function isJS(name) {
+  return /\.js$/.test(name);
+}
+
+function isConfigFilename(name) {
+  return check.unemptyString(name) &&
+    fileExists(name) &&
+    (isJson(name) || isJS(name));
+}
+
+var configFile;
+process.argv.some(function (arg) {
+  if (isConfigFilename(arg)) {
+    configFile = require('path').resolve(arg);
+    return true;
+  }
+});
+log('grunty config filename', configFile);
 
 var fakeGruntfileFunc = require('../src/fake-gruntfile-code')({
   plugin: plugin,
   target: target,
+  config: configFile ? require(configFile) : null,
   src: grunt.cli.options.src,
   dest: grunt.cli.options.dest
 });

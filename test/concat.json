@@ -1,0 +1,8 @@
+{
+  "concat": {
+    "default": {
+      "src": ["test/a.js", "test/b.js"],
+      "dest": "test/out-json-config.js"
+    }
+  }
+}
