@@ -7,6 +7,7 @@
 [![Build status][grunty-ci-image] ][grunty-ci-url]
 [![dependencies][grunty-dependencies-image] ][grunty-dependencies-url]
 [![devdependencies][grunty-devdependencies-image] ][grunty-devdependencies-url]
+[![semantic-release][semantic-image] ][semantic-url]
 
 ## Zero task configuration (defaults)
 
@@ -35,7 +36,7 @@ For example, put grunt plugin configurations into `config.json`
 {
     "concat": {
         "default": {
-            "src:" ["a.js", "b.js"],
+            "src:": ["a.js", "b.js"],
             "dest": "dist/out.js"
         }
     }
@@ -70,7 +71,7 @@ Read [Put mock data into Node require cache](http://glebbahmutov.com/blog/put-mo
 to learn how this project fakes `gruntfile.js` without actually even saving mock one to disk.
 
 If you need to run an example and see diagnostic messages, you can using npm scripts and enabling
-the debug messages using [debug](https://www.npmjs.com/package/debug). 
+the debug messages using [debug](https://www.npmjs.com/package/debug).
 For example to debug parsing config json
 
     $ DEBUG=cli npm run concat-config
@@ -131,3 +132,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 [grunty-dependencies-url]: https://david-dm.org/bahmutov/grunty
 [grunty-devdependencies-image]: https://david-dm.org/bahmutov/grunty/dev-status.png
 [grunty-devdependencies-url]: https://david-dm.org/bahmutov/grunty#info=devDependencies
+[semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-url]: https://github.com/semantic-release/semantic-release

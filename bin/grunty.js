@@ -80,6 +80,7 @@ function isJS(name) {
 
 function isConfigFilename(name) {
   return check.unemptyString(name) &&
+    name !== __filename &&
     fileExists(name) &&
     (isJson(name) || isJS(name));
 }
@@ -91,6 +92,7 @@ process.argv.some(function (arg) {
     return true;
   }
 });
+// console.log('program arguments', process.argv, 'config filename', configFile);
 log('grunty config filename', configFile);
 
 var fakeGruntfileFunc = require('../src/fake-gruntfile-code')({

@@ -1,10 +1,10 @@
 {
   "name": "grunty",
   "description": "Run any grunt plugin as NPM script without Gruntfile.js",
-  "version": "0.2.0",
+  "version": "0.0.0-semantic-release",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bin": {
-    "grunty": "./bin/grunty.js"
+    "grunty": "bin/grunty.js"
   },
   "bugs": {
     "url": "https://github.com/bahmutov/grunty/issues"
@@ -17,9 +17,11 @@
     "lazy-ass": "0.5.8"
   },
   "devDependencies": {
+    "git-issues": "1.2.0",
     "grunt-contrib-concat": "0.5.1",
     "grunt-nice-package": "0.9.2",
-    "pre-git": "0.2.1"
+    "pre-git": "0.2.1",
+    "semantic-release": "4.3.5"
   },
   "engines": {
     "node": "> 0.10.0"
@@ -42,14 +44,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:bahmutov/grunty.git"
+    "url": "https://github.com/bahmutov/grunty.git"
   },
   "scripts": {
+    "issues": "git-issues",
     "test": "npm run concat; npm run concat2; npm run nice; npm run concat-config; npm run concat-js-config",
-    "concat": "grunty grunt-contrib-concat concat --src='test/[a|b].js' --dest=test/out.js --verbose",
-    "concat2": "grunty grunt-contrib-concat concat --src=test/a.js,test/b.js --dest=test/out.js",
-    "concat-config": "grunty grunt-contrib-concat concat test/concat.json",
-    "concat-js-config": "grunty grunt-contrib-concat concat test/concat.js",
-    "nice": "grunty grunt-nice-package nice-package"
+    "concat": "bin/grunty.js grunt-contrib-concat concat --src='test/[a|b].js' --dest=test/out.js --verbose",
+    "concat2": "bin/grunty.js grunt-contrib-concat concat --src=test/a.js,test/b.js --dest=test/out.js",
+    "concat-config": "bin/grunty.js grunt-contrib-concat concat test/concat.json",
+    "concat-js-config": "bin/grunty.js grunt-contrib-concat concat test/concat.js",
+    "nice": "bin/grunty.js grunt-nice-package nice-package",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   }
 }
