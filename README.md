@@ -36,7 +36,7 @@ For example, put grunt plugin configurations into `config.json`
 {
     "concat": {
         "default": {
-            "src:": ["a.js", "b.js"],
+            "src": ["a.js", "b.js"],
             "dest": "dist/out.js"
         }
     }
