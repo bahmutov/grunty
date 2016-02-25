@@ -9,11 +9,12 @@ var join = require('path').join;
 var fileExists = require('fs').existsSync;
 var fromThis = join.bind(null, __dirname);
 var pkg = require(fromThis('../package.json'));
-console.log('%s@%s - %s\n  %s %s\n  cwd %s',
+
+log('%s@%s - %s\n  %s %s',
   pkg.name, pkg.version,
   pkg.description,
-  JSON.stringify(pkg.author), pkg.homepage,
-  process.cwd());
+  JSON.stringify(pkg.author), pkg.homepage);
+log('cwd', process.cwd())
 
 var resolve = require('path').resolve;
 
