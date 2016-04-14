@@ -57,6 +57,40 @@ triggered using `npm run concat-config` command defined in the [package scripts]
 Similarly you can export the JavaScript object from a JS file for configuration,
 see [test/concat.js](test/concat.js)
 
+## Examples
+
+### Deploying to GitHub pages
+
+```sh
+npm i -D grunty grunt-gh-pages
+```
+
+Create `deploy.json`
+
+```json
+{
+  "gh-pages": {
+    "options": {
+      "base": "."
+    },
+    "src": [
+      "index.html",
+      "dist/app-bundle.min.js"
+    ]
+  }
+}
+```
+
+```json
+{
+  "scripts": {
+    "deploy": "grunty grunt-gh-pages gh-pages deploy.json"
+  }
+}
+```
+
+The run `npm run deploy` to deploy to GitHub pages.
+
 ## Details
 
 Separate multiple values like filenames using `,` as in `--src=path/to/foo,path/to/bar`
